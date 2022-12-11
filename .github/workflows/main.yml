@@ -1,0 +1,28 @@
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::144968974651:role/oidc
+        role-duration-seconds: 1200
+        aws-region: ap-south-1
+
+    - name: Deploy to S3 Bucket
+      run: |
+        aws s3 sync . s3://rolebased
