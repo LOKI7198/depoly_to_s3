@@ -19,9 +19,9 @@ jobs:
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::144968974651:role/oidc
+        role-to-assume: arn:aws:iam::536360673168:role/deploy_s3
         role-duration-seconds: 1200
-        aws-region: ap-south-1
+        aws-region: us-west-2
 
     - name: Deploy to S3 Bucket
       run: |
